@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 enum AccountState {
   case existingUser
@@ -14,16 +15,23 @@ enum AccountState {
 }
 
 class LoginViewController: UIViewController {
+    
+    @IBOutlet weak var errorLabel: UILabel!
+    
+    @IBOutlet weak var containerView: UIView!
+    
+    @IBOutlet weak var emailTextField: UITextField!
+    
+    @IBOutlet weak var passwordTextField: UITextField!
+    
+    @IBOutlet weak var loginButton: UIButton!
   
-  @IBOutlet weak var errorLabel: UILabel!
-  @IBOutlet weak var containerView: UIView!
-  @IBOutlet weak var emailTextField: UITextField!
-  @IBOutlet weak var passwordTextField: UITextField!
-  @IBOutlet weak var loginButton: UIButton!
-  @IBOutlet weak var accountStateMessageLabel: UILabel!
-  @IBOutlet weak var accountStateButton: UIButton!
+    @IBOutlet weak var accountStateMessageLabel: UILabel!
   
+    @IBOutlet weak var accountStateButton: UIButton!
+
   private var accountState: AccountState = .existingUser
+    private var authSession = AuthenticationSession()
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -31,12 +39,61 @@ class LoginViewController: UIViewController {
   }
   
   @IBAction func loginButtonPressed(_ sender: UIButton) {
-    
+    guard let email = emailTextField.text, !email.isEmpty,
+        let password = passwordTextField.text, !password.isEmpty else {
+            print("missing fields")
+            return
+    }
+    continueLoginFlow(email: email, password: password)
   }
-  
+    private func continueLoginFlow(email: String, password: String){
+            if accountState == .existingUser {
+                authSession.signExistingUser (email: email, password: password) { [weak self](result) in
+                    
+                    switch result {
+                    case .failure(let error):
+                        DispatchQueue.main.async {
+                            self?.errorLabel.text = "\(error.localizedDescription)"
+                            self?.errorLabel.textColor = .systemRed
+                        }
+                        
+                    case .success:
+                        DispatchQueue.main.async {
+                            //navigate to main view
+                            self?.navigateToMainView()
+                        }
+                    }
+                }
+                
+            } else {
+                
+                authSession.createNewUser(email: email, password: password) { [weak self] (result) in
+                    
+                    switch result {
+                    case .failure(let error):
+                        DispatchQueue.main.async {
+                            self?.errorLabel.text = "\(error.localizedDescription)"
+                            self?.errorLabel.textColor = .systemRed
+                        }
+                        
+                    case .success:
+                        DispatchQueue.main.async {
+                            self?.navigateToMainView()
+                        }
+                    }
+                }
+                
+            }
+        }
+        
+        private func navigateToMainView() {
+            UIViewController.showViewController(storyboardName: "MainView", viewControllerID: "MainTabBarController")
+        }
+
   private func clearErrorLabel() {
     errorLabel.text = ""
   }
+    
   
   @IBAction func toggleAccountState(_ sender: UIButton) {
     // change the account login state

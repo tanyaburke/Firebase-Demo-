@@ -62,7 +62,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <action selector="loginButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="RfY-gp-wpI"/>
+                                            <action selector="loginButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="GDd-oq-qHh"/>
                                         </connections>
                                     </button>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="56d-uf-Nv9">
@@ -81,7 +81,7 @@
                                                     <color key="titleColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="toggleAccountState:" destination="BYZ-38-t0r" eventType="touchUpInside" id="DFW-Tr-op0"/>
+                                                    <action selector="toggleAccountState:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ugd-0a-sS5"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -160,13 +160,13 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
-                        <outlet property="accountStateButton" destination="Myv-6L-gtY" id="ieZ-Pz-jMI"/>
-                        <outlet property="accountStateMessageLabel" destination="ocH-J6-l7S" id="PzM-Vr-zFf"/>
-                        <outlet property="containerView" destination="AEc-4S-aDd" id="4g3-Za-GRh"/>
-                        <outlet property="emailTextField" destination="lmn-Aw-9DD" id="6Ec-uF-3vy"/>
-                        <outlet property="errorLabel" destination="4r4-Do-2LA" id="lac-F4-v5N"/>
-                        <outlet property="loginButton" destination="Iua-Ju-Lie" id="voh-Qi-KMy"/>
-                        <outlet property="passwordTextField" destination="3XB-YP-0mT" id="1vg-OG-8eQ"/>
+                        <outlet property="accountStateButton" destination="Myv-6L-gtY" id="6Z7-0j-PTp"/>
+                        <outlet property="accountStateMessageLabel" destination="ocH-J6-l7S" id="sCt-z9-Cas"/>
+                        <outlet property="containerView" destination="AEc-4S-aDd" id="uMU-bu-ujE"/>
+                        <outlet property="emailTextField" destination="lmn-Aw-9DD" id="FgT-ci-Y73"/>
+                        <outlet property="errorLabel" destination="4r4-Do-2LA" id="rG3-Me-tb2"/>
+                        <outlet property="loginButton" destination="Iua-Ju-Lie" id="uzI-Bf-pLa"/>
+                        <outlet property="passwordTextField" destination="3XB-YP-0mT" id="PBL-Sz-7R4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
